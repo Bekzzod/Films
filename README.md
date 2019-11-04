@@ -1,3 +1,3 @@
 # Film searcher
 
-![screenshot](./src/components/assets/screenshot1.png)
+![screenshot](https://github.com/Bekzzod/Films/blob/master/src/assets/Screenshot1.png)
