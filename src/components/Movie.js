@@ -1,12 +1,14 @@
 import React from "react";
 
 const DEFAULT_PLACEHOLDER_IMAGE =
-  "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg";
+  "https://scannain.com/media/no-poster-1.jpg";
 
-  const trimTitle = string => {
-    const maxLength = 28;
-    return string.length > maxLength ? string.substring(0, maxLength - 3) + "..." : string;
-  }
+const trimTitle = string => {
+  const maxLength = 28;
+  return string.length > maxLength
+    ? string.substring(0, maxLength - 3) + "..."
+    : string;
+};
 
 const Movie = ({ movie }) => {
   const poster =

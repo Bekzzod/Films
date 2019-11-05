@@ -3,16 +3,16 @@ import "./App.css";
 import Header from "./Header";
 import Movie from "./Movie";
 
-const MOVIE_API_URL = "https://www.omdbapi.com/?s=south&apikey=126d5163";
+const MOVIE_API_URL = "https://www.omdbapi.com/?s=south&page=1&apikey=126d5163";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchValue, setSearchValue] = useState("");
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  const [maxPages, setMaxPages] = useState(0);
+  const [maxPages, setMaxPages] = useState(1);
 
   useEffect(() => {
     fetch(MOVIE_API_URL)
@@ -46,10 +46,6 @@ const App = () => {
     setSearchValue(e.target.value);
   };
 
-  const resetInputField = () => {
-    setSearchValue("");
-  };
-
   const callSearchFunction = e => {
     e.preventDefault();
     setPage(1);
@@ -58,14 +54,10 @@ const App = () => {
 
   const handleNextPage = () => {
     setPage(prevPage => prevPage + 1);
-    console.log(page)
-    search(searchValue, page);
   }
 
   const handlePrevPage = () => {
     setPage(prevPage => prevPage - 1);
-    console.log(page)
-    search(searchValue, page);
   }
 
   return (
@@ -92,20 +84,23 @@ const App = () => {
           ))
         )}
       </div>
-      {page > 1 && page < maxPages ? (
+      { maxPages === 1 ? (
         <div className="pages">
-          <div onClick={handlePrevPage}>&lt;</div>
-          <div onClick={handleNextPage}>&gt;</div>
         </div>
-      ) : page === maxPages ? (
-        <div className="pages">
-          <div onClick={handlePrevPage}>&lt;</div>
-        </div>
-      ) : (
-        <div className="pages">
-          <div onClick={handleNextPage}>&gt;</div>
-        </div>
-      )}
+        ) : page > 1 && page < maxPages ? (
+          <div className="pages">
+            <div onClick={handlePrevPage}>&lt;</div>
+            <div onClick={handleNextPage}>&gt;</div>
+          </div>
+        ) : page === maxPages ? (
+          <div className="pages">
+            <div onClick={handlePrevPage}>&lt;</div>
+          </div>
+        ) : (
+          <div className="pages">
+            <div onClick={handleNextPage}>&gt;</div>
+          </div>
+        )}
     </div>
   );
 };
